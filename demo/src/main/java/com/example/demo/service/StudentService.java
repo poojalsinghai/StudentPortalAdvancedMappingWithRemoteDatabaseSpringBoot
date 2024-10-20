@@ -12,7 +12,12 @@ public class StudentService {
     @Autowired
     private StudentRepository studentRepository;
 
-    public List<String> getStudentNamesByCourseName(String courseName) {
-        return studentRepository.findStudentNamesByCourseName(courseName);
+    public List<String> getStudentNamesByCourseName(String cName) {
+
+        return studentRepository.findStudentNamesByCourseName(cName);
+    }
+
+    public void updateStudentCourseId(int studentId, int courseId) {
+        studentRepository.updateStudentCourseId(studentId, courseId);
     }
 }

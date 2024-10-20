@@ -22,6 +22,9 @@ public class Student {
     @Column(name = "phone")
     private long phone;
 
+    @Column(name = "c_id", insertable = false, updatable = false)  // Read-only version
+    private int cId;
+
     @ManyToOne
     @JoinColumn(name = "c_id", referencedColumnName = "id")
     private Course course; // Foreign key reference to Course
@@ -36,6 +39,7 @@ public class Student {
         this.email = email;
         this.phone = phone;
         this.course = course; // Assign course here
+        this.cId = course != null ? course.getId() : 0;
     }
 
     public int getId() {
@@ -86,6 +90,15 @@ public class Student {
         this.course = course;
     }
 
+    public int getCId() {
+        return course != null ? course.getId() : 0; // Get course ID from Course object
+    }
+
+    public void setCId(int cId) {
+        this.cId = cId;
+    }
+
+
     @Override
     public String toString() {
         return "Student{" +
@@ -94,7 +107,7 @@ public class Student {
                 ", enrollment_no='" + enrollmentNo + '\'' +
                 ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +
-                ", c_id=" + (course != null ? course.getId() : "No Course") +  // Access c_id here
+                ", c_id=" + cId +  // Access c_id here
                 '}';
     }
 
